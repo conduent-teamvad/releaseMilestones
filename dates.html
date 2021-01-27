@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="550" height="240">
+	<script>
+	var canvas = document.getElementById("myCanvas");
+	var ctx = canvas.getContext("2d");
+
+	function getQueryVariable(variable)
+	{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++)
+	   {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+	}
+	
+	function displayArrow(xPos, yPos)
+	{
+		ctx.fillStyle = "#5B9BD5";
+		ctx.strokeStyle = "#5B9BD5";
+		ctx.fillRect(xPos, yPos, 440, 15);
+		// the triangle
+		ctx.beginPath();
+		ctx.moveTo(xPos+440, yPos-10);
+		ctx.lineTo(xPos+460, yPos+8);
+		ctx.lineTo(xPos+440, yPos+24);
+		ctx.closePath();
+		
+		// the fill color
+		ctx.fill();
+
+		// Lines
+		ctx.moveTo(xPos+60, yPos-10);
+		ctx.lineTo(xPos+60, yPos+25);
+		ctx.stroke();
+		ctx.moveTo(xPos+228, yPos-10);
+		ctx.lineTo(xPos+228, yPos+25);
+		ctx.stroke();
+		ctx.moveTo(xPos+399, yPos-10);
+		ctx.lineTo(xPos+399, yPos+25);
+		ctx.stroke();
+	}
+	
+	function displayMilestone(milestoneName, milestoneDate, xPos, yPos)
+	{
+		ctx.font = "18px Arial";
+		ctx.fillStyle = "#5B9BD5";
+		ctx.fillRect(xPos, yPos, 120, 50);
+		ctx.fillStyle = "black";
+		ctx.fillText(milestoneName, xPos+10, yPos+30);	
+		ctx.fillStyle = "#D6E1F1";
+		ctx.fillRect(xPos, yPos+50, 120, 60);
+		ctx.fillStyle = "black";
+		ctx.fillText(milestoneDate, xPos+10, yPos+85);	
+	}
+	
+	var vsDate = getQueryVariable("vsDate");
+	var fatDate = getQueryVariable("fatDate");
+	var prodDate = getQueryVariable("prodDate");
+	displayArrow(10, 50);
+	displayMilestone("SV start", vsDate, 10, 90);
+	displayMilestone("FAT", fatDate, 180, 90);
+	displayMilestone("Production", prodDate, 350, 90);
+
+
+	</script>
+
+
+</canvas></body></html>
